@@ -47,7 +47,7 @@ session_start();
 	    		</tr>
 	    		<tr>
 	    			<td>Password</td>
-	    			<td><input type="password" name="password" size="30"></td>
+	    			<td><input type="password" name="password" size="225"></td>
 	    		</tr>
 	    		<tr>
 	    			<td colspan="2" align="center"> <input type="submit" name="btn_submit" value="Đăng nhập"></td>
