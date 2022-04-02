@@ -1,41 +1,35 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Http\Requests\CreateUserRequest;
-class UsersController extends Controller
+use App\LoyalCustomer;
+use Auth; 
+class UserController extends Controller
 {
-        protected $user;
-    
-    public function __construct(User $user){
-        $this->user = $user;
+    public function getLogin()
+    {
+        return view('login');//return ra trang login để đăng nhập
     }
-    function index(){
-                if(request()->key){
-           dd(request()->key);
+
+    public function postLogin(Request $request)
+    {
+        $arr = [
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
+        if ($request->remember == trans('remember.Remember Me')) {
+            $remember = true;
+        } else {
+            $remember = false;
+        }
+        
+        if (Auth::guard('loyal_customer')->attempt($arr)) {
+
+            dd('đăng nhập thành công');
+        } else {
+
+            dd('tài khoản và mật khẩu chưa chính xác');
         }
     }
-    function getregister(){
-     return view('Register',['title'=>'thêm người dùng']);
-    }
-
-    function postregister(CreateUserRequest $request){
-    function postregister(CreateUserRequest $request)
-    {
-
-      $user->checkregister($request);
-      return redirect('list');
-      $user = $user->checkregister($request);
-
-      if($user)
-      {
-        Session::flash('success','tạo thành công tài khoản');
-        return redirect('list');
-      }
-    }
-    function view(){
-
-        return view('list',['listall'=> $user->listAll(),'title'=>'danh sach']);
-    }
-}
 }

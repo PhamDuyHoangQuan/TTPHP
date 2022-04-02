@@ -34,11 +34,23 @@ return [
     | Supported: "session"
     |
     */
-
     'guards' => [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+        ],
+    'loyal_customer' => [
+            'driver' => 'session',
+            'provider' => 'loyal_customers',
+        ],
+        'loyal_customer-api' => [
+            'driver' => 'token',
+            'provider' => 'loyal_customers',
         ],
     ],
 
@@ -63,6 +75,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+    'loyal_customers' => [
+            'driver' => 'eloquent',
+            'model' => App\LoyalCustomer::class,
         ],
 
         // 'users' => [
@@ -91,9 +107,15 @@ return [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,
-            'throttle' => 60,
+        ],
+        'loyal_customers' => [
+            'provider' => 'loyal_customers',
+            'table' => 'password_resets',
+            'expire' => 60,
         ],
     ],
+
+];
 
     /*
     |--------------------------------------------------------------------------
@@ -106,6 +128,3 @@ return [
     |
     */
 
-    'password_timeout' => 10800,
-
-];

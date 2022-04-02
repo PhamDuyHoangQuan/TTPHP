@@ -1,44 +1,46 @@
 <?php
 
 namespace App\Models;
+ use Session;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
+     protected $fillable = [
+        'mail_address',
+        'password',
         'name',
-        'email',
-        'password',
+        'address',
+        'phone'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    public function checkregister($request)
+    {
+      
+     try{
+      User::create([
+      'mail_address'=> (string) $request->input('mail_address'),
+      'password'=> (string)bcrypt( $request->input('password')),
+      'name'=> (string)$request->input('name'),
+      'address'=> (string) $request->input('address'),
+      'phone'=> (string) $request->input('phone')
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+      ]);
+
+      Session::flash('success','tạo thành công tài khoản');
+
+     } catch(\Exception $err){
+
+      Session::flash('error',$err->getMessage());
+      return false;
+
+      }
+     return true;
+    }
+    public function listAll(){
+      return User::orderBy('id','asc')->paginate(20);
+    }
+
+
 }

@@ -27,4 +27,37 @@ class AuthServiceProvider extends ServiceProvider
 
         //
     }
+    public function boot()
+
+{
+
+  $this->registerPolicies();
+
+
+  Gate::define('view-page-admin', function ($user) {
+
+      if ($user->admin == "1") {
+
+          return true;
+
+      }
+
+      return false;
+
+  });
+
+
+  Gate::define('view-page-guest', function ($user) {
+
+      if ($user->admin == "1" || $user->admin == "0") {
+
+          return true;
+
+      }
+
+      return false;
+
+  });
+
+}
 }
