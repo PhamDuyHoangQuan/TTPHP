@@ -424,3 +424,11 @@ Did you mean one of these?
 [stacktrace]
 #0 {main}
 "} 
+[2022-04-07 02:20:36] local.ERROR: Cannot redeclare App\Providers\AuthServiceProvider::boot() {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot redeclare App\\Providers\\AuthServiceProvider::boot() at C:\\xampp\\htdocs\\blog\\app\\Providers\\AuthServiceProvider.php:30)
+[stacktrace]
+#0 {main}
+"} 
+[2022-04-07 02:21:05] local.ERROR: Cannot redeclare App\Providers\AuthServiceProvider::boot() {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot redeclare App\\Providers\\AuthServiceProvider::boot() at C:\\xampp\\htdocs\\blog\\app\\Providers\\AuthServiceProvider.php:30)
+[stacktrace]
+#0 {main}
+"} 

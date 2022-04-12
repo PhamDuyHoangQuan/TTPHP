@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,15 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Models\User::class, function (Faker $faker) {
     return [
         'mail_address' => $faker->safeEmail,
-        'password' => md5(str_random(10)),
-        'name'=> $faker->name,
-        'address'=> $faker->address,
-        'phone' => $faker->phone,
+        'password' => bcrypt(str_random(10)),
+         'name' => $faker->name,
+        'address' => 'Hà Nội',
+        'phone' => '0969686300',
+        'role'=>'2',
+        'classroom_id'=> $faker->numberBetween(1,10)
+        
     ];
 });
